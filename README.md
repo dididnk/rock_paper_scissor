@@ -17,6 +17,8 @@ A simple mobile game built with **Flutter** where the player competes against th
 
 *(You can insert app screenshots here, e.g., in an `/assets/screenshots/` folder)*
 
+![alt text](rls-portrait.png)
+
 ## 🛠️ Tech Stack
 
 * **Flutter (Dart)**
