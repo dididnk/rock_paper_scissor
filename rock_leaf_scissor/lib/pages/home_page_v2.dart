@@ -1,14 +1,14 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePageV2 extends StatefulWidget {
+  const HomePageV2({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageV2> createState() => _HomePageV2State();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageV2State extends State<HomePageV2> with SingleTickerProviderStateMixin {
   final rock = "rock";
   final leaf = "leaf";
   final scissor = "scissor";
