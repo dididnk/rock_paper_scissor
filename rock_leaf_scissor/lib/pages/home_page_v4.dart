@@ -9,7 +9,8 @@ class HomePageV3 extends StatefulWidget {
   State<HomePageV3> createState() => _HomePageV3State();
 }
 
-class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateMixin {
+class _HomePageV3State extends State<HomePageV3>
+    with SingleTickerProviderStateMixin {
   final rock = "rock";
   final leaf = "leaf";
   final scissor = "scissor";
@@ -78,7 +79,9 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
       setUserChoice(choice);
       setIaChoice();
       playGame();
-      _animationController.forward().then((_) => _animationController.reverse());
+      _animationController.forward().then(
+        (_) => _animationController.reverse(),
+      );
     }
   }
 
@@ -210,7 +213,7 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                   Container(
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -228,7 +231,11 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                           children: [
                             ScaleTransition(
                               scale: _scaleAnimation,
-                              child: Image.asset(iaImage, height: 60, width: 60),
+                              child: Image.asset(
+                                iaImage,
+                                height: 60,
+                                width: 60,
+                              ),
                             ),
                             SizedBox(width: 12),
                             Text(
@@ -242,7 +249,10 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                           ],
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.red[100],
                             borderRadius: BorderRadius.circular(12),
@@ -279,7 +289,11 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                       children: [
                         ScaleTransition(
                           scale: _scaleAnimation,
-                          child: Image.asset(iaChoiceImage, height: 80, width: 80),
+                          child: Image.asset(
+                            iaChoiceImage,
+                            height: 80,
+                            width: 80,
+                          ),
                         ),
                         SizedBox(height: 16),
                         Text(
@@ -293,7 +307,11 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                         SizedBox(height: 16),
                         ScaleTransition(
                           scale: _scaleAnimation,
-                          child: Image.asset(userChoiceImage, height: 80, width: 80),
+                          child: Image.asset(
+                            userChoiceImage,
+                            height: 80,
+                            width: 80,
+                          ),
                         ),
                       ],
                     ),
@@ -306,7 +324,11 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                     children: [
                       _buildActionButton(rock, rockImage, Colors.grey[400]!),
                       _buildActionButton(leaf, leafImage, Colors.green[200]!),
-                      _buildActionButton(scissor, scissorImage, Colors.blue[200]!),
+                      _buildActionButton(
+                        scissor,
+                        scissorImage,
+                        Colors.blue[200]!,
+                      ),
                     ],
                   ),
                   SizedBox(height: 20),
@@ -315,7 +337,7 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                   Container(
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -332,7 +354,11 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                           children: [
                             ScaleTransition(
                               scale: _scaleAnimation,
-                              child: Image.asset(userImage, height: 60, width: 60),
+                              child: Image.asset(
+                                userImage,
+                                height: 60,
+                                width: 60,
+                              ),
                             ),
                             SizedBox(width: 12),
                             Text(
@@ -346,7 +372,10 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                           ],
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.green[100],
                             borderRadius: BorderRadius.circular(12),
@@ -369,7 +398,7 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                   Container(
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -408,7 +437,9 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
-                                  color: iaScore > userScore ? Colors.red[600] : Colors.green[600],
+                                  color: iaScore > userScore
+                                      ? Colors.red[600]
+                                      : Colors.green[600],
                                 ),
                               ),
                             ],
@@ -437,7 +468,7 @@ class _HomePageV3State extends State<HomePageV3> with SingleTickerProviderStateM
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.4),
+              color: color.withValues(alpha: 0.4),
               blurRadius: 8,
               spreadRadius: 2,
             ),

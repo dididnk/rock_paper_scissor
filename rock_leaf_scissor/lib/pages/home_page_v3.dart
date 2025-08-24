@@ -152,12 +152,12 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
   );
 
   BoxDecoration get _glassCard => BoxDecoration(
-    color: Colors.white.withOpacity(0.08),
+    color: Colors.white.withValues(alpha: 0.08),
     borderRadius: BorderRadius.circular(24),
-    border: Border.all(color: Colors.white.withOpacity(0.15), width: 1),
+    border: Border.all(color: Colors.white.withValues(alpha: 0.15), width: 1),
     boxShadow: [
       BoxShadow(
-        color: Colors.black.withOpacity(0.25),
+        color: Colors.black.withValues(alpha: 0.25),
         blurRadius: 20,
         offset: const Offset(0, 10),
       ),
@@ -178,7 +178,7 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundColor: Colors.white.withOpacity(0.12),
+            backgroundColor: Colors.white.withValues(alpha: 0.12),
             child: Padding(
               padding: const EdgeInsets.all(6.0),
               child: Image.asset(avatarImage, fit: BoxFit.contain),
@@ -209,7 +209,7 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
                   child: LinearProgressIndicator(
                     value: value.clamp(0, 1),
                     minHeight: 10,
-                    backgroundColor: Colors.white.withOpacity(0.12),
+                    backgroundColor: Colors.white.withValues(alpha: 0.12),
                     valueColor: AlwaysStoppedAnimation<Color>(color),
                   ),
                 ),
@@ -247,9 +247,9 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
               key: ValueKey(imagePath),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.06),
+                color: Colors.white.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: Colors.white.withOpacity(0.12)),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
               ),
               child: Image.asset(imagePath, height: 72, width: 72),
             ),
@@ -272,11 +272,11 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
           height: 14,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: active ? Colors.white : Colors.white.withOpacity(0.25),
+            color: active ? Colors.white : Colors.white.withValues(alpha: 0.25),
             boxShadow: active
                 ? [
                     BoxShadow(
-                      color: Colors.white.withOpacity(0.6),
+                      color: Colors.white.withValues(alpha: 0.6),
                       blurRadius: 8,
                       spreadRadius: 1,
                     ),
@@ -304,20 +304,20 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
           borderRadius: BorderRadius.circular(22),
           gradient: LinearGradient(
             colors: [
-              (tint ?? Colors.white).withOpacity(selected ? 0.22 : 0.12),
-              (tint ?? Colors.white).withOpacity(selected ? 0.10 : 0.06),
+              (tint ?? Colors.white).withValues(alpha: selected ? 0.22 : 0.12),
+              (tint ?? Colors.white).withValues(alpha: selected ? 0.10 : 0.06),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           border: Border.all(
-            color: Colors.white.withOpacity(selected ? 0.35 : 0.18),
+            color: Colors.white.withValues(alpha: selected ? 0.35 : 0.18),
             width: selected ? 1.5 : 1,
           ),
           boxShadow: selected
               ? [
                   BoxShadow(
-                    color: (tint ?? Colors.white).withOpacity(0.35),
+                    color: (tint ?? Colors.white).withValues(alpha: 0.35),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -339,7 +339,7 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
     final win = userScore > iaScore;
     return Positioned.fill(
       child: Container(
-        decoration: BoxDecoration(color: Colors.black.withOpacity(0.55)),
+        decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.55)),
         child: Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.84,
@@ -348,12 +348,12 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
               color: win ? const Color(0xFF0E3B2E) : const Color(0xFF3B0E0E),
               borderRadius: BorderRadius.circular(28),
               border: Border.all(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 width: 1.2,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.35),
+                  color: Colors.black.withValues(alpha: 0.35),
                   blurRadius: 30,
                   offset: const Offset(0, 18),
                 ),
@@ -428,9 +428,9 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.18),
+        color: Colors.black.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white.withOpacity(0.15)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
@@ -443,7 +443,7 @@ class _HomePageV3State extends State<HomePageV3> with TickerProviderStateMixin {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: color.withOpacity(0.6),
+                  color: color.withValues(alpha: 0.6),
                   blurRadius: 8,
                   spreadRadius: 1,
                 ),

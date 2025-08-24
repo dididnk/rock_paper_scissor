@@ -1,5 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:rock_leaf_scissor/utils/global_constances.dart';
+import 'package:rock_leaf_scissor/widgets/custom_button.dart';
+import 'package:rock_leaf_scissor/widgets/final_result_widget.dart';
+import 'package:rock_leaf_scissor/widgets/score_board_widget.dart';
+import 'package:rock_leaf_scissor/widgets/vs_badge.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,19 +13,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  final rock = "rock";
-  final leaf = "leaf";
-  final scissor = "scissor";
-
-  final iaImage = "assets/images/ia.png";
-  final userImage = "assets/images/user.png";
-
-  final defaultImage = "assets/images/question.png";
-  final rockImage = "assets/images/rock.png";
-  final leafImage = "assets/images/leaf.png";
-  final scissorImage = "assets/images/scissor.png";
-
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   final totalRounds = 3;
   final maxResult = 3;
 
@@ -47,13 +41,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     super.initState();
-    
+
     // Configuration des animations
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    
+
     _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
     );
@@ -87,7 +81,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       setUserChoice(choice);
       setIaChoice();
       playGame();
-    }
+    } else {}
   }
 
   void setUserChoice(String choice) {
@@ -148,7 +142,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       });
       return;
     }
-    
+
     // check ia win case
     if ((iaChoice == rock && userChoice == scissor) ||
         (iaChoice == scissor && userChoice == leaf) ||
@@ -167,7 +161,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         _showResult = true;
       });
     }
-    
+
     _animationController.forward(from: 0.0).then((_) {
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
@@ -175,7 +169,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         });
       });
     });
-    
+
     setState(() {
       roundsPlayed++;
     });
@@ -203,11 +197,133 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    Column iaChoiceWidget() {
+      return Column(
+        children: [
+          const Text(
+            "IA CHOICE",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepPurple,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.deepPurple.withValues(alpha: 0.3),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Image.asset(iaChoiceImage, height: 80, width: 80),
+          ),
+        ],
+      );
+    }
+
+    Column userChoiceWidget() {
+      return Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.deepPurple.withValues(alpha: 0.3),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Image.asset(userChoiceImage, height: 80, width: 80),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "YOUR CHOICE",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepPurple,
+            ),
+          ),
+        ],
+      );
+    }
+
+    Row actionButtons() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          CustomButton(
+            choice: rock,
+            image: rockImage,
+            color: Colors.grey,
+            onTap: () => onButtonPressed(rock),
+          ),
+          CustomButton(
+            choice: leaf,
+            image: leafImage,
+            color: Colors.green,
+            onTap: () => onButtonPressed(leaf),
+          ),
+          CustomButton(
+            choice: scissor,
+            image: scissorImage,
+            color: Colors.blue,
+            onTap: () => onButtonPressed(scissor),
+          ),
+        ],
+      );
+    }
+
+    Widget resultOverlay() {
+      return Center(
+        child: ScaleTransition(
+          scale: _scaleAnimation,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            decoration: BoxDecoration(
+              color: _resultColor,
+              borderRadius: BorderRadius.circular(25),
+              boxShadow: [
+                BoxShadow(
+                  color: _resultColor.withValues(alpha: 0.5),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Text(
+              _roundResult,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Rock Leaf Scissor',
-          style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
         actions: [
@@ -218,17 +334,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ],
         backgroundColor: Colors.deepPurple,
         elevation: 10,
-        shadowColor: Colors.deepPurple.withOpacity(0.5),
+        shadowColor: Colors.deepPurple.withValues(alpha: 0.5),
       ),
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Colors.deepPurple.shade100,
-              Colors.blue.shade100,
-            ],
+            colors: [Colors.deepPurple.shade100, Colors.blue.shade100],
           ),
         ),
         child: SafeArea(
@@ -238,88 +352,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Score Board
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.deepPurple.withOpacity(0.2),
-                        blurRadius: 10,
-                        offset: const Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            "YOU",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepPurple,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "$userScore",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "ROUND",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "$roundsPlayed/$totalRounds",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "IA",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepPurple,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "$iaScore",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                ScoreBoardWidget(
+                  userScore: userScore,
+                  iaScore: iaScore,
+                  roundsPlayed: roundsPlayed,
+                  totalRounds: totalRounds,
                 ),
-                
+
                 const SizedBox(height: 30),
-                
+
                 // Game Area
                 Expanded(
                   child: Stack(
@@ -328,173 +369,38 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           // IA Choice
-                          Column(
-                            children: [
-                              const Text(
-                                "IA CHOICE",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepPurple,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.deepPurple.withOpacity(0.3),
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 5),
-                                    ),
-                                  ],
-                                ),
-                                child: Image.asset(iaChoiceImage, height: 80, width: 80),
-                              ),
-                            ],
-                          ),
-                          
+                          iaChoiceWidget(),
                           // VS Badge
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.deepPurple,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: const Text(
-                              "VS",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          
+                          VsBadge(),
                           // User Choice
-                          Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.deepPurple.withOpacity(0.3),
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 5),
-                                    ),
-                                  ],
-                                ),
-                                child: Image.asset(userChoiceImage, height: 80, width: 80),
-                              ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                "YOUR CHOICE",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepPurple,
-                                ),
-                              ),
-                            ],
-                          ),
+                          userChoiceWidget(),
                         ],
                       ),
-                      
                       // Result Overlay
-                      if (_showResult)
-                        Center(
-                          child: ScaleTransition(
-                            scale: _scaleAnimation,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                              decoration: BoxDecoration(
-                                color: _resultColor,
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: _resultColor.withOpacity(0.5),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 5),
-                                  ),
-                                ],
-                              ),
-                              child: Text(
-                                _roundResult,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      if (_showResult) resultOverlay(),
                     ],
                   ),
                 ),
-                
+
                 const SizedBox(height: 30),
-                
+
                 // Action Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildChoiceButton(rock, rockImage, Colors.grey),
-                    _buildChoiceButton(leaf, leafImage, Colors.green),
-                    _buildChoiceButton(scissor, scissorImage, Colors.blue),
-                  ],
-                ),
-                
+                actionButtons(),
+
                 const SizedBox(height: 20),
-                
+
                 // Final Result
                 if (isGameEnd)
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: finalResult == "You Win!" ? Colors.green.shade100 : Colors.red.shade100,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      finalResult,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: finalResult == "You Win!" ? Colors.green.shade800 : Colors.red.shade800,
-                      ),
-                    ),
+                  FinalResultWidget(
+                    userScore: userScore,
+                    iaScore: iaScore,
+                    finalResult: finalResult,
+                    resetGame: resetGame,
                   ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildChoiceButton(String choice, String image, Color color) {
-    return GestureDetector(
-      onTap: () => onButtonPressed(choice),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: color.withOpacity(0.3),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Image.asset(image, height: 40, width: 40),
       ),
     );
   }
