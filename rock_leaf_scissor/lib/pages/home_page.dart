@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage>
 
   String finalResult = "";
   bool isGameEnd = false;
+  bool isChecking = false;
 
   // Nouvelles variables pour l'animation et la gamification
   late AnimationController _animationController;
@@ -81,7 +82,10 @@ class _HomePageState extends State<HomePage>
       setUserChoice(choice);
       setIaChoice();
       playGame();
-    } else {}
+    }
+    setState(() {
+      isChecking = false;
+    });
   }
 
   void setUserChoice(String choice) {
@@ -126,6 +130,9 @@ class _HomePageState extends State<HomePage>
   }
 
   void playGame() {
+    setState(() {
+      isChecking = false;
+    });
     // check draw case
     if (iaChoice == userChoice) {
       setState(() {
@@ -190,6 +197,24 @@ class _HomePageState extends State<HomePage>
       setState(() {
         isGameEnd = true;
       });
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.transparent,
+            content: FinalResultWidget(
+              userScore: userScore,
+              iaScore: iaScore,
+              finalResult: finalResult,
+              resetGame: () {
+                Navigator.of(context).pop();
+                resetGame();
+              },
+            ),
+          );
+        },
+      );
       return true;
     }
     return false;
@@ -336,69 +361,50 @@ class _HomePageState extends State<HomePage>
         elevation: 10,
         shadowColor: Colors.deepPurple.withValues(alpha: 0.5),
       ),
-      body: Container(
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple.shade100, Colors.blue.shade100],
-          ),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Score Board
-                ScoreBoardWidget(
-                  userScore: userScore,
-                  iaScore: iaScore,
-                  roundsPlayed: roundsPlayed,
-                  totalRounds: totalRounds,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Score Board
+              ScoreBoardWidget(
+                userScore: userScore,
+                iaScore: iaScore,
+                roundsPlayed: roundsPlayed,
+                totalRounds: totalRounds,
+              ),
+
+              const SizedBox(height: 30),
+
+              // Game Area
+              Expanded(
+                child: Stack(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        // IA Choice
+                        iaChoiceWidget(),
+                        // VS Badge
+                        VsBadge(),
+                        // User Choice
+                        userChoiceWidget(),
+                      ],
+                    ),
+                    // Result Overlay
+                    if (_showResult) resultOverlay(),
+                  ],
                 ),
+              ),
 
-                const SizedBox(height: 30),
+              const SizedBox(height: 30),
 
-                // Game Area
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          // IA Choice
-                          iaChoiceWidget(),
-                          // VS Badge
-                          VsBadge(),
-                          // User Choice
-                          userChoiceWidget(),
-                        ],
-                      ),
-                      // Result Overlay
-                      if (_showResult) resultOverlay(),
-                    ],
-                  ),
-                ),
+              // Action Buttons
+              if (!isChecking) actionButtons(),
 
-                const SizedBox(height: 30),
-
-                // Action Buttons
-                actionButtons(),
-
-                const SizedBox(height: 20),
-
-                // Final Result
-                if (isGameEnd)
-                  FinalResultWidget(
-                    userScore: userScore,
-                    iaScore: iaScore,
-                    finalResult: finalResult,
-                    resetGame: resetGame,
-                  ),
-              ],
-            ),
+              const SizedBox(height: 20),
+            ],
           ),
         ),
       ),

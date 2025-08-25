@@ -20,23 +20,23 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
 
-flutter_launcher_icons:
+flutter_launcher_icons: # flutter clean; flutter pub get; flutter pub run flutter_launcher_icons:main
   android: "launcher_icon"
   ios: true
-  image_path: "assets/logo/logo.png"
+  image_path: "assets/icon/icon.png"
   min_sdk_android: 21 
   web:
     generate: true
-    image_path: "assets/logo/logo.png"
+    image_path: "assets/icon/icon.png"
     background_color: "#00008E"
     theme_color: "#00008E"
   windows:
     generate: true
-    image_path: "assets/logo/logo.png"
+    image_path: "assets/icon/icon.png"
     icon_size: 48 
   macos:
     generate: true
-    image_path: "assets/logo/logo.png"
+    image_path: "assets/icon/icon.png"
 
 flutter:
   uses-material-design: true
