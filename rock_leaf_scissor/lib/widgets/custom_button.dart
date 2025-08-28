@@ -21,13 +21,13 @@ class CustomButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: color.withValues(alpha: 0.3),
+              color: color.withValues(alpha: 0.9),
               blurRadius: 10,
-              offset: const Offset(0, 5),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
