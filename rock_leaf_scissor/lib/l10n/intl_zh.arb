@@ -1,7 +1,7 @@
 {
   "@@locale": "zh",
 
-  "appTitle": "石头 叶子 剪刀",
+  "appTitle": "Rock Leaf Scissor",
   "@appTitle": {
     "description": "应用程序的标题。"
   },

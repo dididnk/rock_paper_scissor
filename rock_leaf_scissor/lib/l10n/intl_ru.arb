@@ -1,7 +1,7 @@
 {
   "@@locale": "ru",
 
-  "appTitle": "Камень Лист Бумага Ножницы",
+  "appTitle": "Rock Leaf Scissor",
   "@appTitle": {
     "description": "Название приложения."
   },
