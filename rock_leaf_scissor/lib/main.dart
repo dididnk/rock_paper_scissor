@@ -5,6 +5,8 @@ import 'package:rock_leaf_scissor/l10n/app_localizations.dart';
 import 'package:rock_leaf_scissor/l10n/l10n.dart';
 import 'package:rock_leaf_scissor/pages/home_page.dart';
 import 'package:rock_leaf_scissor/providers/local_provider.dart';
+import 'package:rock_leaf_scissor/utils/global_constances.dart';
+import 'package:rock_leaf_scissor/utils/theme/app_theme.dart';
 
 void main() {
   runApp(
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
     final localeProvider = Provider.of<LocaleProvider>(context);
 
     return MaterialApp(
-      title: 'Rock Leaf Scissor',
+      title: appName,
       debugShowCheckedModeBanner: false,
       supportedLocales: L10n.all,
       locale: localeProvider.locale,
@@ -33,11 +35,9 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-      ),
+      theme: AppTheme.lightTheme,    
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,  
       home: const HomePage(),
     );
   }

@@ -15,28 +15,63 @@ class LanguageWidget extends StatelessWidget {
       currentLocale = L10n.all.first;
     }
 
-    return DropdownButtonHideUnderline(
-      child: DropdownButton<Locale>(
-        value: currentLocale,
-        icon: const Icon(Icons.language),
-        items: L10n.all.map((locale) {
-          final flag = L10n.getFlag(locale.languageCode);
-          return DropdownMenuItem(
-            value: locale,
-            child: Row(
-              children: [
-                Text(flag, style: const TextStyle(fontSize: 24)),
-                const SizedBox(width: 8),
-                Text(locale.languageCode.toUpperCase()),
-              ],
-            ),
-          );
-        }).toList(),
-        onChanged: (Locale? locale) {
-          if (locale != null) {
-            localeProvider.setLocale(locale);
-          }
-        },
+    return Container(
+      margin: const EdgeInsets.only(right: 8.0),
+      height: 42.0,
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.onSecondary,
+          width: 0.5,
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<Locale>(
+          value: currentLocale,
+          elevation: 8,
+          borderRadius: BorderRadius.circular(12),
+          icon: Icon(
+            Icons.language,
+            color: Theme.of(context).colorScheme.onSecondary,
+            size: 24,
+          ),
+          dropdownColor: Theme.of(context).colorScheme.surface,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontWeight: FontWeight.w500,
+          ),
+          items: L10n.all.map((locale) {
+            final flag = L10n.getFlag(locale.languageCode);
+            return DropdownMenuItem(
+              value: locale,
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(flag, style: const TextStyle(fontSize: 20)),
+                    const SizedBox(width: 8),
+                    Text(
+                      locale.languageCode.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.8),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (Locale? locale) {
+            if (locale != null) {
+              localeProvider.setLocale(locale);
+            }
+          },
+        ),
       ),
     );
   }

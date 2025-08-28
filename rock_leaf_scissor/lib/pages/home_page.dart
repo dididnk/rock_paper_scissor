@@ -69,8 +69,8 @@ class _HomePageState extends State<HomePage>
       iaScore = 0;
       userChoice = "";
       iaChoice = "";
-      userChoiceImage = defaultImage;
-      iaChoiceImage = defaultImage;
+      userChoiceImage = questionImageUrl;
+      iaChoiceImage = questionImageUrl;
       finalResult = "";
       isGameEnd = false;
       _showResult = false;
@@ -94,17 +94,17 @@ class _HomePageState extends State<HomePage>
     if (choice == rock) {
       setState(() {
         userChoice = rock;
-        userChoiceImage = rockImage;
+        userChoiceImage = rockImageUrl;
       });
     } else if (choice == leaf) {
       setState(() {
         userChoice = leaf;
-        userChoiceImage = leafImage;
+        userChoiceImage = leafImageUrl;
       });
     } else {
       setState(() {
         userChoice = scissor;
-        userChoiceImage = scissorImage;
+        userChoiceImage = scissorImageUrl;
       });
     }
   }
@@ -116,17 +116,17 @@ class _HomePageState extends State<HomePage>
     if (iaValue == 0) {
       setState(() {
         iaChoice = rock;
-        iaChoiceImage = rockImage;
+        iaChoiceImage = rockImageUrl;
       });
     } else if (iaValue == 1) {
       setState(() {
         iaChoice = leaf;
-        iaChoiceImage = leafImage;
+        iaChoiceImage = leafImageUrl;
       });
     } else {
       setState(() {
         iaChoice = scissor;
-        iaChoiceImage = scissorImage;
+        iaChoiceImage = scissorImageUrl;
       });
     }
   }
@@ -226,7 +226,6 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-
     Column iaChoiceWidget() {
       return Column(
         children: [
@@ -295,19 +294,19 @@ class _HomePageState extends State<HomePage>
         children: [
           CustomButton(
             choice: rock,
-            image: rockImage,
+            image: rockImageUrl,
             color: Colors.grey,
             onTap: () => onButtonPressed(rock),
           ),
           CustomButton(
             choice: leaf,
-            image: leafImage,
+            image: leafImageUrl,
             color: Colors.green,
             onTap: () => onButtonPressed(leaf),
           ),
           CustomButton(
             choice: scissor,
-            image: scissorImage,
+            image: scissorImageUrl,
             color: Colors.blue,
             onTap: () => onButtonPressed(scissor),
           ),
@@ -349,24 +348,11 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         title: Text(
           l10n.appTitle,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
-        centerTitle: true,
-        actions: [
-          LanguageWidget(),
-          const SizedBox(width: 10),
-          IconButton(
-            icon: const Icon(Icons.refresh, size: 24.0, color: Colors.white),
-            onPressed: resetGame,
-          ),
-        ],
-        backgroundColor: Colors.deepPurple,
-        elevation: 10,
-        shadowColor: Colors.deepPurple.withValues(alpha: 0.5),
+        actions: [LanguageWidget()],
       ),
       body: SafeArea(
         child: Padding(
@@ -374,6 +360,17 @@ class _HomePageState extends State<HomePage>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // header
+              LanguageWidget(),
+              const SizedBox(width: 10),
+              IconButton(
+                icon: const Icon(
+                  Icons.refresh,
+                  size: 24.0,
+                  color: Colors.red,
+                ),
+                onPressed: resetGame,
+              ),
               // Score Board
               ScoreBoardWidget(
                 userScore: userScore,

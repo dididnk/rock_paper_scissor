@@ -1,11 +1,13 @@
-const rock = "rock";
-const leaf = "leaf";
-const scissor = "scissor";
+const String appName = "Rock Leaf Scissor";
 
-const iaImage = "assets/images/ia.png";
-const userImage = "assets/images/user.png";
+const String rock = "rock";
+const String leaf = "leaf";
+const String scissor = "scissor";
 
-const defaultImage = "assets/images/question.png";
-const rockImage = "assets/images/rock.png";
-const leafImage = "assets/images/leaf.png";
-const scissorImage = "assets/images/scissor.png";
+const String rockImageUrl = "assets/images/rock.png";
+const String leafImageUrl = "assets/images/leaf.png";
+const String scissorImageUrl = "assets/images/scissor.png";
+
+const String iaProfileUrl = "assets/images/ia.png";
+const String userProfileUrl = "assets/images/user.png";
+const String questionImageUrl = "assets/images/question.png";
