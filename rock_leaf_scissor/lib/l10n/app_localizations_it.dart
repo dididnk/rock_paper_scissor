@@ -9,7 +9,7 @@ class AppLocalizationsIt extends AppLocalizations {
   AppLocalizationsIt([String locale = 'it']) : super(locale);
 
   @override
-  String get appTitle => 'Sasso Foglia Forbice';
+  String get appTitle => 'Rock Leaf Scissor';
 
   @override
   String get roundDraw => 'Pareggio!';

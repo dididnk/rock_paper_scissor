@@ -9,7 +9,7 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get appTitle => 'Pierre Feuille Ciseaux';
+  String get appTitle => 'Rock Leaf Scissor';
 
   @override
   String get roundDraw => 'Égalité !';

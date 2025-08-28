@@ -9,7 +9,7 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'Piedra Hoja Tijera';
+  String get appTitle => 'Rock Leaf Scissor';
 
   @override
   String get roundDraw => '¡Empate!';
