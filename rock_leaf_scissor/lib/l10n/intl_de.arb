@@ -1,0 +1,43 @@
+{
+  "@@locale": "de",
+
+  "appTitle": "Stein Blatt Schere",
+  "@appTitle": {
+    "description": "Der Titel der Anwendung."
+  },
+
+  "roundDraw": "Unentschieden!",
+  "@roundDraw": {
+    "description": "Wird angezeigt, wenn eine Runde unentschieden endet."
+  },
+
+  "iaWin": "KI gewinnt!",
+  "@iaWin": {
+    "description": "Wird angezeigt, wenn die KI eine Runde gewinnt."
+  },
+
+  "userWin": "Du gewinnst!",
+  "@userWin": {
+    "description": "Wird angezeigt, wenn der Benutzer eine Runde gewinnt."
+  },
+
+  "finalLose": "Du hast verloren!",
+  "@finalLose": {
+    "description": "Wird angezeigt, wenn der Benutzer das Spiel verliert."
+  },
+
+  "finalWin": "Du hast gewonnen!",
+  "@finalWin": {
+    "description": "Wird angezeigt, wenn der Benutzer das Spiel gewinnt."
+  },
+
+  "iaChoice": "WAHL DER KI",
+  "@iaChoice": {
+    "description": "Beschriftung für die Wahl der KI."
+  },
+
+  "userChoice": "DEINE WAHL",
+  "@userChoice": {
+    "description": "Beschriftung für die Wahl des Benutzers."
+  }
+}

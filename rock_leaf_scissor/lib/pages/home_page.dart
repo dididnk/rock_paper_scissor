@@ -1,8 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:rock_leaf_scissor/l10n/app_localizations.dart';
 import 'package:rock_leaf_scissor/utils/global_constances.dart';
 import 'package:rock_leaf_scissor/widgets/custom_button.dart';
 import 'package:rock_leaf_scissor/widgets/final_result_widget.dart';
+import 'package:rock_leaf_scissor/widgets/language_widget.dart';
 import 'package:rock_leaf_scissor/widgets/score_board_widget.dart';
 import 'package:rock_leaf_scissor/widgets/vs_badge.dart';
 
@@ -222,6 +224,9 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+
     Column iaChoiceWidget() {
       return Column(
         children: [
@@ -342,8 +347,8 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Rock Leaf Scissor',
+        title: Text(
+          l10n.appTitle,
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
@@ -352,6 +357,8 @@ class _HomePageState extends State<HomePage>
         ),
         centerTitle: true,
         actions: [
+          LanguageWidget(),
+          const SizedBox(width: 10),
           IconButton(
             icon: const Icon(Icons.refresh, size: 24.0, color: Colors.white),
             onPressed: resetGame,

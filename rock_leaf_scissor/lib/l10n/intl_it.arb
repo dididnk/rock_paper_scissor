@@ -1,0 +1,43 @@
+{
+  "@@locale": "it",
+
+  "appTitle": "Sasso Foglia Forbice",
+  "@appTitle": {
+    "description": "Il titolo dell'applicazione."
+  },
+
+  "roundDraw": "Pareggio!",
+  "@roundDraw": {
+    "description": "Visualizzato quando un turno termina in pareggio."
+  },
+
+  "iaWin": "L'IA vince!",
+  "@iaWin": {
+    "description": "Visualizzato quando l'IA vince un turno."
+  },
+
+  "userWin": "Hai vinto!",
+  "@userWin": {
+    "description": "Visualizzato quando l'utente vince un turno."
+  },
+
+  "finalLose": "Hai perso!",
+  "@finalLose": {
+    "description": "Visualizzato quando l'utente perde la partita."
+  },
+
+  "finalWin": "Hai vinto!",
+  "@finalWin": {
+    "description": "Visualizzato quando l'utente vince la partita."
+  },
+
+  "iaChoice": "SCELTA DELL'IA",
+  "@iaChoice": {
+    "description": "Etichetta per la scelta dell'IA."
+  },
+
+  "userChoice": "LA TUA SCELTA",
+  "@userChoice": {
+    "description": "Etichetta per la scelta dell'utente."
+  }
+}

@@ -16,6 +16,7 @@ class ScoreBoardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -35,7 +36,7 @@ class ScoreBoardWidget extends StatelessWidget {
           Column(
             children: [
               Text(
-                "YOU",
+                "Rock Leaf Scissor",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
