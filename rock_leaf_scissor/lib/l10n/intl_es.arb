@@ -1,43 +1,14 @@
 {
   "@@locale": "es",
-
   "appTitle": "Rock Leaf Scissor",
-  "@appTitle": {
-    "description": "El título de la aplicación."
-  },
-
+  "player": "Jugador",
+  "ia": "IA",
+  "restart": "Reiniciar",
   "roundDraw": "¡Empate!",
-  "@roundDraw": {
-    "description": "Se muestra cuando una ronda termina en empate."
-  },
-
   "iaWin": "¡La IA gana!",
-  "@iaWin": {
-    "description": "Se muestra cuando la IA gana una ronda."
-  },
-
   "userWin": "¡Tú ganas!",
-  "@userWin": {
-    "description": "Se muestra cuando el usuario gana una ronda."
-  },
-
   "finalLose": "¡Has perdido!",
-  "@finalLose": {
-    "description": "Se muestra cuando el usuario pierde el juego."
-  },
-
   "finalWin": "¡Has ganado!",
-  "@finalWin": {
-    "description": "Se muestra cuando el usuario gana el juego."
-  },
-
   "iaChoice": "ELECCIÓN DE LA IA",
-  "@iaChoice": {
-    "description": "Etiqueta para la elección de la IA."
-  },
-
-  "userChoice": "TU ELECCIÓN",
-  "@userChoice": {
-    "description": "Etiqueta para la elección del usuario."
-  }
+  "userChoice": "TU ELECCIÓN"
 }

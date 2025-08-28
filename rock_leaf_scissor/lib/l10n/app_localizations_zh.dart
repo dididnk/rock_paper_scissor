@@ -12,6 +12,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appTitle => 'Rock Leaf Scissor';
 
   @override
+  String get player => '玩家';
+
+  @override
+  String get ia => 'AI';
+
+  @override
+  String get restart => '重新开始';
+
+  @override
   String get roundDraw => '平局！';
 
   @override

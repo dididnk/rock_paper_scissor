@@ -1,41 +1,46 @@
 {
   "@@locale": "en",
-
   "appTitle": "Rock Leaf Scissor",
   "@appTitle": {
     "description": "The title of the application."
   },
-
+  "player": "Player",
+  "@player": {
+    "description": "Label for the human player."
+  },
+  "ia": "AI",
+  "@ia": {
+    "description": "Label for the AI opponent."
+  },
+  "restart": "Restart",
+  "@restart": {
+    "description": "Button label to restart the game."
+  },
+  
   "roundDraw": "Draw!",
   "@roundDraw": {
     "description": "Displayed when a round ends in a draw."
   },
-
   "iaWin": "AI wins!",
   "@iaWin": {
     "description": "Displayed when the AI wins a round."
   },
-
   "userWin": "You win!",
   "@userWin": {
     "description": "Displayed when the user wins a round."
   },
-
   "finalLose": "You lost!",
   "@finalLose": {
     "description": "Displayed when the user loses the game."
   },
-
   "finalWin": "You win!",
   "@finalWin": {
     "description": "Displayed when the user wins the game."
   },
-
   "iaChoice": "AI CHOICE",
   "@iaChoice": {
     "description": "Label for the AI's choice."
   },
-
   "userChoice": "YOUR CHOICE",
   "@userChoice": {
     "description": "Label for the user's choice."

@@ -360,23 +360,11 @@ class _HomePageState extends State<HomePage>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // header
-              LanguageWidget(),
-              const SizedBox(width: 10),
-              IconButton(
-                icon: const Icon(
-                  Icons.refresh,
-                  size: 24.0,
-                  color: Colors.red,
-                ),
-                onPressed: resetGame,
-              ),
-              // Score Board
               ScoreBoardWidget(
                 userScore: userScore,
                 iaScore: iaScore,
                 roundsPlayed: roundsPlayed,
-                totalRounds: totalRounds,
+                resetGame: resetGame,
               ),
 
               const SizedBox(height: 30),

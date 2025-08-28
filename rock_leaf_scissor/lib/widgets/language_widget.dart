@@ -22,7 +22,7 @@ class LanguageWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Theme.of(context).colorScheme.onSecondary,
+          color: Theme.of(context).colorScheme.onSurface,
           width: 0.5,
         ),
       ),
@@ -33,7 +33,7 @@ class LanguageWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           icon: Icon(
             Icons.language,
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: Theme.of(context).colorScheme.onSurface,
             size: 24,
           ),
           dropdownColor: Theme.of(context).colorScheme.surface,

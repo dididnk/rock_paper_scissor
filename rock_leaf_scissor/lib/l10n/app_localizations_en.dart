@@ -12,6 +12,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Rock Leaf Scissor';
 
   @override
+  String get player => 'Player';
+
+  @override
+  String get ia => 'AI';
+
+  @override
+  String get restart => 'Restart';
+
+  @override
   String get roundDraw => 'Draw!';
 
   @override

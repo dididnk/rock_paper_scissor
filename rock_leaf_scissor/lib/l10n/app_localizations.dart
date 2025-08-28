@@ -116,6 +116,24 @@ abstract class AppLocalizations {
   /// **'Rock Leaf Scissor'**
   String get appTitle;
 
+  /// Label for the human player.
+  ///
+  /// In en, this message translates to:
+  /// **'Player'**
+  String get player;
+
+  /// Label for the AI opponent.
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get ia;
+
+  /// Button label to restart the game.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart'**
+  String get restart;
+
   /// Displayed when a round ends in a draw.
   ///
   /// In en, this message translates to:

@@ -1,43 +1,14 @@
 {
   "@@locale": "zh",
-
   "appTitle": "Rock Leaf Scissor",
-  "@appTitle": {
-    "description": "应用程序的标题。"
-  },
-
+  "player": "玩家",
+  "ia": "AI",
+  "restart": "重新开始",
   "roundDraw": "平局！",
-  "@roundDraw": {
-    "description": "当一轮以平局结束时显示。"
-  },
-
   "iaWin": "AI获胜！",
-  "@iaWin": {
-    "description": "当AI赢得一轮时显示。"
-  },
-
   "userWin": "你赢了！",
-  "@userWin": {
-    "description": "当用户赢得一轮时显示。"
-  },
-
   "finalLose": "你输了！",
-  "@finalLose": {
-    "description": "当用户输掉游戏时显示。"
-  },
-
   "finalWin": "你赢了！",
-  "@finalWin": {
-    "description": "当用户赢得游戏时显示。"
-  },
-
   "iaChoice": "AI选择",
-  "@iaChoice": {
-    "description": "AI的选择标签。"
-  },
-
-  "userChoice": "你的选择",
-  "@userChoice": {
-    "description": "用户的选择标签。"
-  }
+  "userChoice": "你的选择"
 }

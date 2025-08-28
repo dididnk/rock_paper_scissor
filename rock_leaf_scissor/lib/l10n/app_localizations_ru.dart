@@ -12,6 +12,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appTitle => 'Rock Leaf Scissor';
 
   @override
+  String get player => 'Игрок';
+
+  @override
+  String get ia => 'ИИ';
+
+  @override
+  String get restart => 'Перезапустить';
+
+  @override
   String get roundDraw => 'Ничья!';
 
   @override

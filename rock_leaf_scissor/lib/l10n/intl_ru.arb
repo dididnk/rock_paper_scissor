@@ -1,43 +1,14 @@
 {
   "@@locale": "ru",
-
   "appTitle": "Rock Leaf Scissor",
-  "@appTitle": {
-    "description": "Название приложения."
-  },
-
+  "player": "Игрок",
+  "ia": "ИИ",
+  "restart": "Перезапустить",
   "roundDraw": "Ничья!",
-  "@roundDraw": {
-    "description": "Отображается, когда раунд заканчивается ничьей."
-  },
-
   "iaWin": "ИИ победил!",
-  "@iaWin": {
-    "description": "Отображается, когда ИИ выигрывает раунд."
-  },
-
   "userWin": "Вы победили!",
-  "@userWin": {
-    "description": "Отображается, когда пользователь выигрывает раунд."
-  },
-
   "finalLose": "Вы проиграли!",
-  "@finalLose": {
-    "description": "Отображается, когда пользователь проигрывает игру."
-  },
-
   "finalWin": "Вы победили!",
-  "@finalWin": {
-    "description": "Отображается, когда пользователь выигрывает игру."
-  },
-
   "iaChoice": "ВЫБОР ИИ",
-  "@iaChoice": {
-    "description": "Метка для выбора ИИ."
-  },
-
-  "userChoice": "ВАШ ВЫБОР",
-  "@userChoice": {
-    "description": "Метка для выбора пользователя."
-  }
+  "userChoice": "ВАШ ВЫБОР"
 }
