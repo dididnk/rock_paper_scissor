@@ -208,7 +208,6 @@ class _HomePageState extends State<HomePage>
             content: FinalResultWidget(
               userScore: userScore,
               iaScore: iaScore,
-              finalResult: finalResult,
               resetGame: () {
                 Navigator.of(context).pop();
                 resetGame();

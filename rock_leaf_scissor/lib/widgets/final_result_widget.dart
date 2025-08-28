@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:rock_leaf_scissor/l10n/app_localizations.dart';
+import 'package:rock_leaf_scissor/utils/global_constances.dart';
+import 'package:rock_leaf_scissor/utils/theme/app_colors.dart';
 
 class FinalResultWidget extends StatelessWidget {
   final int userScore;
   final int iaScore;
-  final String finalResult;
   final VoidCallback resetGame;
 
   const FinalResultWidget({
     super.key,
     required this.userScore,
     required this.iaScore,
-    required this.finalResult,
     required this.resetGame,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bool isPlayerWin = userScore > iaScore;
+    final String winnerImage = isPlayerWin ? userProfileUrl : iaProfileUrl;
+    final l10n = AppLocalizations.of(context)!;
+
     Widget pillScore(String who, int score, Color color) {
       return Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
@@ -25,6 +30,7 @@ class FinalResultWidget extends StatelessWidget {
           border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               width: 8,
@@ -43,7 +49,7 @@ class FinalResultWidget extends StatelessWidget {
               ),
             ),
             Text(
-              "$who: $score",
+              "$who : $score",
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
@@ -55,15 +61,13 @@ class FinalResultWidget extends StatelessWidget {
     }
 
     return Container(
-      //width: MediaQuery.of(context).size.width * 0.84,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: userScore > iaScore ? Colors.deepPurple : Colors.red.shade800,
+        color: isPlayerWin
+            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.9)
+            : Theme.of(context).colorScheme.error.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(28),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.2),
-          width: 1.2,
-        ),
+        border: Border.all(color: greyColor, width: 1.2),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.35),
@@ -75,34 +79,29 @@ class FinalResultWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            userScore > iaScore ? "VICTORY" : "DEFEAT",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 2,
-            ),
-          ),
+          Image.asset(winnerImage, height: 80, width: 80),
           const SizedBox(height: 6),
           Text(
-            finalResult,
-            style: const TextStyle(color: Colors.white70, fontSize: 14),
+            isPlayerWin ? l10n.finalWin : l10n.finalLose,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.1,
+            ),
           ),
           const SizedBox(height: 18),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               pillScore(
-                "YOU",
-                userScore,
-                userScore > iaScore ? Colors.greenAccent : Colors.white,
-              ),
-              const SizedBox(width: 12),
-              pillScore(
-                "IA",
+                l10n.ia,
                 iaScore,
-                !(userScore > iaScore) ? Colors.redAccent : Colors.white,
+                !(isPlayerWin) ? redColor : Colors.white,
+              ),
+              const SizedBox(height: 12),
+              pillScore(
+                l10n.player,
+                userScore,
+                isPlayerWin ? greenColor : Colors.white,
               ),
             ],
           ),
@@ -118,8 +117,8 @@ class FinalResultWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 22),
             ),
             onPressed: resetGame,
-            child: const Text(
-              "Play Again",
+            child: Text(
+              l10n.restart,
               style: TextStyle(fontWeight: FontWeight.w800, letterSpacing: 1.2),
             ),
           ),
