@@ -58,14 +58,7 @@ class ScoreBoardWidget extends StatelessWidget {
           ),
           Column(
             children: [
-              Text(
-                "ROUND",
-                style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
-                  fontWeight: FontWeight.bold,
-                  color: greyColor,
-                ),
-              ),
+              Icon(Icons.more_time_outlined, color: greyColor, size: 28),
               const SizedBox(height: 5),
               Text(
                 "$roundsPlayed",

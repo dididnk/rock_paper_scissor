@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:rock_leaf_scissor/l10n/app_localizations.dart';
 import 'package:rock_leaf_scissor/utils/global_constances.dart';
 import 'package:rock_leaf_scissor/widgets/custom_button.dart';
 import 'package:rock_leaf_scissor/widgets/final_result_widget.dart';
 import 'package:rock_leaf_scissor/widgets/language_widget.dart';
 import 'package:rock_leaf_scissor/widgets/score_board_widget.dart';
-import 'package:rock_leaf_scissor/widgets/vs_badge.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,9 +30,8 @@ class _HomePageState extends State<HomePage>
   String userChoiceImage = "assets/images/question.png";
   String iaChoiceImage = "assets/images/question.png";
 
-  String finalResult = "";
   bool isGameEnd = false;
-  bool isChecking = false;
+  bool showButtons = true;
 
   // Nouvelles variables pour l'animation et la gamification
   late AnimationController _animationController;
@@ -40,6 +39,8 @@ class _HomePageState extends State<HomePage>
   bool _showResult = false;
   String _roundResult = "";
   Color _resultColor = Colors.transparent;
+  Color userChoiceColor = Colors.deepPurple;
+  Color iaChoiceColor = Colors.deepPurple;
 
   @override
   void initState() {
@@ -71,26 +72,25 @@ class _HomePageState extends State<HomePage>
       iaChoice = "";
       userChoiceImage = questionImageUrl;
       iaChoiceImage = questionImageUrl;
-      finalResult = "";
       isGameEnd = false;
       _showResult = false;
       _roundResult = "";
       _resultColor = Colors.transparent;
+      userChoiceColor = Colors.deepPurple;
+      iaChoiceColor = Colors.deepPurple;
+      showButtons = true;
     });
   }
 
-  void onButtonPressed(String choice) {
-    if (!checkIsGameEnd()) {
-      setUserChoice(choice);
+  void onButtonPressed(String choice, Color color) {
+    if (!isGameEnd && showButtons) {
+      setUserChoice(choice, color);
       setIaChoice();
       playGame();
     }
-    setState(() {
-      isChecking = false;
-    });
   }
 
-  void setUserChoice(String choice) {
+  void setUserChoice(String choice, Color color) {
     if (choice == rock) {
       setState(() {
         userChoice = rock;
@@ -107,6 +107,9 @@ class _HomePageState extends State<HomePage>
         userChoiceImage = scissorImageUrl;
       });
     }
+    setState(() {
+      userChoiceColor = color;
+    });
   }
 
   void setIaChoice() {
@@ -117,55 +120,63 @@ class _HomePageState extends State<HomePage>
       setState(() {
         iaChoice = rock;
         iaChoiceImage = rockImageUrl;
+        iaChoiceColor = Colors.grey;
       });
     } else if (iaValue == 1) {
       setState(() {
         iaChoice = leaf;
         iaChoiceImage = leafImageUrl;
+        iaChoiceColor = Colors.green;
       });
     } else {
       setState(() {
         iaChoice = scissor;
         iaChoiceImage = scissorImageUrl;
+        iaChoiceColor = Colors.blue;
       });
     }
   }
 
   void playGame() {
     setState(() {
-      isChecking = false;
+      showButtons = false;
     });
-    // check draw case
+
+    // Vérification du cas nul
     if (iaChoice == userChoice) {
       setState(() {
-        _roundResult = "Égalité!";
+        _roundResult = AppLocalizations.of(context)!.roundDraw;
         _resultColor = Colors.amber;
         _showResult = true;
       });
+
       _animationController.forward(from: 0.0).then((_) {
         Future.delayed(const Duration(seconds: 1), () {
           setState(() {
             _showResult = false;
+            showButtons = true;
           });
         });
       });
       return;
     }
 
-    // check ia win case
+    // Vérification de la victoire de l'IA
     if ((iaChoice == rock && userChoice == scissor) ||
         (iaChoice == scissor && userChoice == leaf) ||
         (iaChoice == leaf && userChoice == rock)) {
       setState(() {
         iaScore++;
-        _roundResult = "IA gagne!";
+        _roundResult = AppLocalizations.of(context)!.iaWin;
         _resultColor = Colors.red;
         _showResult = true;
       });
-    } else {
+    }
+    // Cas de victoire du joueur
+    else {
       setState(() {
         userScore++;
-        _roundResult = "Vous gagnez!";
+        _roundResult = AppLocalizations.of(context)!.userWin;
         _resultColor = Colors.green;
         _showResult = true;
       });
@@ -175,27 +186,18 @@ class _HomePageState extends State<HomePage>
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           _showResult = false;
+          showButtons = true;
+          roundsPlayed++;
+          checkIsGameEnd();
         });
       });
     });
-
-    setState(() {
-      roundsPlayed++;
-    });
-    checkIsGameEnd();
   }
 
-  bool checkIsGameEnd() {
-    if (iaScore == maxResult || userScore == maxResult) {
-      if (iaScore > userScore) {
-        setState(() {
-          finalResult = "You lost!";
-        });
-      } else {
-        setState(() {
-          finalResult = "You Win!";
-        });
-      }
+  void checkIsGameEnd() {
+    var gameEnd = iaScore == maxResult || userScore == maxResult;
+
+    if (gameEnd) {
       setState(() {
         isGameEnd = true;
       });
@@ -216,9 +218,7 @@ class _HomePageState extends State<HomePage>
           );
         },
       );
-      return true;
     }
-    return false;
   }
 
   @override
@@ -228,13 +228,11 @@ class _HomePageState extends State<HomePage>
     Column iaChoiceWidget() {
       return Column(
         children: [
-          const Text(
-            "IA CHOICE",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.deepPurple,
-            ),
+          Text(
+            l10n.iaChoice,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
           Container(
@@ -244,13 +242,13 @@ class _HomePageState extends State<HomePage>
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.deepPurple.withValues(alpha: 0.3),
+                  color: iaChoiceColor.withValues(alpha: 0.9),
                   blurRadius: 10,
-                  offset: const Offset(0, 5),
+                  offset: const Offset(0, 1),
                 ),
               ],
             ),
-            child: Image.asset(iaChoiceImage, height: 80, width: 80),
+            child: Image.asset(iaChoiceImage, height: 60, width: 60),
           ),
         ],
       );
@@ -266,22 +264,20 @@ class _HomePageState extends State<HomePage>
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.deepPurple.withValues(alpha: 0.3),
+                  color: userChoiceColor.withValues(alpha: 0.9),
                   blurRadius: 10,
-                  offset: const Offset(0, 5),
+                  offset: const Offset(0, 1),
                 ),
               ],
             ),
-            child: Image.asset(userChoiceImage, height: 80, width: 80),
+            child: Image.asset(userChoiceImage, height: 60, width: 60),
           ),
           const SizedBox(height: 10),
-          const Text(
-            "YOUR CHOICE",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.deepPurple,
-            ),
+          Text(
+            l10n.userChoice,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
         ],
       );
@@ -295,19 +291,19 @@ class _HomePageState extends State<HomePage>
             choice: rock,
             image: rockImageUrl,
             color: Colors.grey,
-            onTap: () => onButtonPressed(rock),
+            onTap: () => onButtonPressed(rock, Colors.grey),
           ),
           CustomButton(
             choice: leaf,
             image: leafImageUrl,
             color: Colors.green,
-            onTap: () => onButtonPressed(leaf),
+            onTap: () => onButtonPressed(leaf, Colors.green),
           ),
           CustomButton(
             choice: scissor,
             image: scissorImageUrl,
             color: Colors.blue,
-            onTap: () => onButtonPressed(scissor),
+            onTap: () => onButtonPressed(scissor, Colors.blue),
           ),
         ],
       );
@@ -366,7 +362,7 @@ class _HomePageState extends State<HomePage>
                 resetGame: resetGame,
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
 
               // Game Area
               Expanded(
@@ -378,7 +374,7 @@ class _HomePageState extends State<HomePage>
                         // IA Choice
                         iaChoiceWidget(),
                         // VS Badge
-                        VsBadge(),
+                        Image.asset(vsImageUrl, height: 60, width: 60),
                         // User Choice
                         userChoiceWidget(),
                       ],
@@ -389,12 +385,19 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
 
               // Action Buttons
-              if (!isChecking) actionButtons(),
+              if (showButtons) ...[
+                actionButtons(),
+              ] else ...[
+                LoadingAnimationWidget.bouncingBall(
+                  color: Color(0xFF8E24AA),
+                  size: MediaQuery.of(context).size.height * 0.06,
+                ),
+              ],
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
             ],
           ),
         ),

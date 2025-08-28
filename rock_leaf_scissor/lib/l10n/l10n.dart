@@ -25,7 +25,7 @@ class L10n {
       case 'it':
         return '🇮🇹';
       case 'pt':
-        return '🇵🇹🇧🇷';
+        return '🇵🇹';
       case 'ru':
         return '🇷🇺';
       case 'zh':
