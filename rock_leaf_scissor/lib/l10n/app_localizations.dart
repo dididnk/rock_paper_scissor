@@ -113,7 +113,7 @@ abstract class AppLocalizations {
   /// The title of the application.
   ///
   /// In en, this message translates to:
-  /// **'Rock Leaf Scissor'**
+  /// **'Rock Paper Scissors'**
   String get appTitle;
 
   /// Label for the human player.
