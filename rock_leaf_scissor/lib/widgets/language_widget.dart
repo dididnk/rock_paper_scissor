@@ -12,7 +12,8 @@ class LanguageWidget extends StatelessWidget {
     Locale currentLocale = localeProvider.locale;
 
     if (!L10n.all.contains(currentLocale)) {
-      currentLocale = L10n.all.first;
+      currentLocale = const Locale('en', 'US');
+      localeProvider.setLocale(currentLocale);
     }
 
     return Container(
@@ -28,7 +29,7 @@ class LanguageWidget extends StatelessWidget {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<Locale>(
-          value: currentLocale,
+          value: currentLocale, 
           elevation: 8,
           borderRadius: BorderRadius.circular(12),
           icon: Icon(
