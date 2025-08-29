@@ -1,6 +1,6 @@
 {
   "@@locale": "ru",
-  "appTitle": "Rock Leaf Scissor",
+  "appTitle": "Rock Paper Scissors",
   "player": "Игрок",
   "ia": "ИИ",
   "restart": "Перезапустить",

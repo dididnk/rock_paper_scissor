@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "Rock Leaf Scissor",
+  "appTitle": "Rock Paper Scissors",
   "@appTitle": {
     "description": "The title of the application."
   },

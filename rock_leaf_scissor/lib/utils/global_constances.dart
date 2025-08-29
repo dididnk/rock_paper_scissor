@@ -1,4 +1,4 @@
-const String appName = "Rock Leaf Scissor";
+const String appName = "Rock Paper Scissors";
 
 const String rock = "rock";
 const String leaf = "leaf";
