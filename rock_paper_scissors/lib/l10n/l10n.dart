@@ -3,40 +3,28 @@ import "package:flutter/material.dart";
 class L10n {
   static final all = [
     // Français
-    const Locale('fr', 'FR'), // France
-    const Locale('fr', 'CA'), // Canada
+    const Locale('fr', ''), // France
 
     // Anglais
     const Locale('en', 'US'), // États-Unis
-    const Locale('en', 'GB'), // Royaume-Uni
-    const Locale('en', 'AU'), // Australie
-    const Locale('en', 'CA'), // Canada
 
     // Espagnol
-    const Locale('es', 'ES'), // Espagne
-    const Locale('es', 'MX'), // Mexique
-    const Locale('es', 'AR'), // Argentine
+    const Locale('es', ''), // Espagne
 
     // Allemand
-    const Locale('de', 'DE'), // Allemagne
-    const Locale('de', 'AT'), // Autriche
-    const Locale('de', 'CH'), // Suisse
+    const Locale('de', ''), // Allemagne
 
     // Italien
-    const Locale('it', 'IT'), // Italie
-    const Locale('it', 'CH'), // Suisse
+    const Locale('it', ''), // Italie
 
     // Portugais
-    const Locale('pt', 'PT'), // Portugal
-    const Locale('pt', 'BR'), // Brésil
+    const Locale('pt', ''), // Portugal
 
     // Russe
-    const Locale('ru', 'RU'),
+    const Locale('ru', ''),
 
     // Chinois
-    const Locale('zh', 'CN'), // Simplifié (Chine)
-    const Locale('zh', 'TW'), // Traditionnel (Taïwan)
-    const Locale('zh', 'HK'), // Traditionnel (Hong Kong)
+    const Locale('zh', ''), // Simplifié (Chine)
   ];
 
   static String getFlag(String code) {
