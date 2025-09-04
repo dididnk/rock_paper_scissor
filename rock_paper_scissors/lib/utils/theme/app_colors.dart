@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // === Main color (branding) ===
-const primaryColor = Colors.deepPurple;
+const primaryColor = Color(0xFF743ded);
 
 // === Complementary colors ===
 const secondaryColor = Color(0xFF7c4dff); 
@@ -23,6 +23,5 @@ const greenColor = Color(0xFF43A047);
 const greenColors = Color.fromARGB(255, 121, 228, 126);
 const yellowColor = Color(0xFFFBC02D);
 const blueColor = Color(0xFF1E88E5);
-const purpleColor = Color(0xFF8E24AA);
 const greyColor = Color(0xFF9E9E9E);
 const infoColor = Color(0xFF29B6F6);
