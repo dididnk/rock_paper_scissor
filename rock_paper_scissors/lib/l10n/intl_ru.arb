@@ -1,6 +1,6 @@
 {
   "@@locale": "ru",
-  "appTitle": "Rock Paper Scissors",
+  "appTitle": "Камень-ножницы-бумага",
   "player": "Игрок",
   "ia": "ИИ",
   "restart": "Перезапустить",

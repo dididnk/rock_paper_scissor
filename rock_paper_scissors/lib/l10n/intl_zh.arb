@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "appTitle": "Rock Paper Scissors",
+  "appTitle": "石头剪刀布",
   "player": "玩家",
   "ia": "AI",
   "restart": "重新开始",

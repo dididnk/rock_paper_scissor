@@ -18,7 +18,7 @@ class LanguageWidget extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(right: 8.0),
-      height: 42.0,
+      height: 32.0,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -32,15 +32,11 @@ class LanguageWidget extends StatelessWidget {
           value: currentLocale,
           elevation: 8,
           borderRadius: BorderRadius.circular(12),
-          icon: Icon(
-            Icons.language,
-            color: Theme.of(context).colorScheme.onSurface,
-            size: 24,
-          ),
           dropdownColor: Theme.of(context).colorScheme.surface,
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSurface,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
+            fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
           ),
           items:
               L10n.all.map((locale) {

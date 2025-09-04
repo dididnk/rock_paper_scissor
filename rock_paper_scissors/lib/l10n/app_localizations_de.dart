@@ -9,7 +9,7 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
-  String get appTitle => 'Rock Paper Scissors';
+  String get appTitle => 'Schere Stein Papier';
 
   @override
   String get player => 'Spieler';

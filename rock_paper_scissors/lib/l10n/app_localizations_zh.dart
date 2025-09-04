@@ -9,7 +9,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => 'Rock Paper Scissors';
+  String get appTitle => '石头剪刀布';
 
   @override
   String get player => '玩家';
