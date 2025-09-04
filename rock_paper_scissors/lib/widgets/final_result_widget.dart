@@ -19,6 +19,8 @@ class FinalResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isPlayerWin = userScore > iaScore;
     final String winnerImage = isPlayerWin ? userProfileUrl : iaProfileUrl;
+    final double cardSize =
+        MediaQuery.of(context).size.width > webScreenSize ? 35.0 : 60.0;
     final l10n = AppLocalizations.of(context)!;
 
     Widget pillScore(String who, int score, Color color) {
@@ -61,7 +63,7 @@ class FinalResultWidget extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.all(22),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color:
             isPlayerWin
@@ -79,8 +81,10 @@ class FinalResultWidget extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.asset(winnerImage, height: 80, width: 80),
+          Image.asset(winnerImage, height: cardSize, width: cardSize),
           const SizedBox(height: 6),
           Text(
             isPlayerWin ? l10n.finalWin : l10n.finalLose,
@@ -88,8 +92,9 @@ class FinalResultWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
               letterSpacing: 1.1,
             ),
+            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 18),
+          const SizedBox(height: 10.0),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -106,7 +111,7 @@ class FinalResultWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10.0),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,

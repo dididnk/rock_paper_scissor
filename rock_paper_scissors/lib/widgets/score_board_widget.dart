@@ -41,7 +41,7 @@ class ScoreBoardWidget extends StatelessWidget {
               Text(
                 l10n.player,
                 style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
+                  fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -50,7 +50,7 @@ class ScoreBoardWidget extends StatelessWidget {
               Text(
                 "$userScore",
                 style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
+                  fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -74,7 +74,7 @@ class ScoreBoardWidget extends StatelessWidget {
               Text(
                 l10n.ia,
                 style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
+                  fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
                 ),

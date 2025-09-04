@@ -224,8 +224,12 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final isWebSCreen = MediaQuery.of(context).size.width > webScreenSize;
+    final double cardSize =
+        MediaQuery.of(context).size.width > webScreenSize ? 35.0 : 60.0;
 
-    Column iaChoiceWidget() {
+    /*-------- Widget -------------*/
+    Widget iaChoiceWidget() {
       return Column(
         children: [
           Text(
@@ -248,13 +252,17 @@ class _HomePageState extends State<HomePage>
                 ),
               ],
             ),
-            child: Image.asset(iaChoiceImage, height: 60, width: 60),
+            child: Image.asset(
+              iaChoiceImage,
+              height: cardSize,
+              width: cardSize,
+            ),
           ),
         ],
       );
     }
 
-    Column userChoiceWidget() {
+    Widget userChoiceWidget() {
       return Column(
         children: [
           Container(
@@ -270,7 +278,11 @@ class _HomePageState extends State<HomePage>
                 ),
               ],
             ),
-            child: Image.asset(userChoiceImage, height: 60, width: 60),
+            child: Image.asset(
+              userChoiceImage,
+              height: cardSize,
+              width: cardSize,
+            ),
           ),
           const SizedBox(height: 10),
           Text(
@@ -278,32 +290,6 @@ class _HomePageState extends State<HomePage>
             style: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-          ),
-        ],
-      );
-    }
-
-    Row actionButtons() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          CustomButton(
-            choice: rock,
-            image: rockImageUrl,
-            color: Colors.grey,
-            onTap: () => onButtonPressed(rock, Colors.grey),
-          ),
-          CustomButton(
-            choice: paper,
-            image: paperImageUrl,
-            color: Colors.green,
-            onTap: () => onButtonPressed(paper, Colors.green),
-          ),
-          CustomButton(
-            choice: scissor,
-            image: scissorImageUrl,
-            color: Colors.blue,
-            onTap: () => onButtonPressed(scissor, Colors.blue),
           ),
         ],
       );
@@ -339,6 +325,71 @@ class _HomePageState extends State<HomePage>
       );
     }
 
+    /*-------------- Variables --------------- */
+
+    List<Widget> buttonList = [
+      CustomButton(
+        choice: rock,
+        image: rockImageUrl,
+        color: Colors.grey,
+        onTap: () => onButtonPressed(rock, Colors.grey),
+      ),
+      CustomButton(
+        choice: paper,
+        image: paperImageUrl,
+        color: Colors.green,
+        onTap: () => onButtonPressed(paper, Colors.green),
+      ),
+      CustomButton(
+        choice: scissor,
+        image: scissorImageUrl,
+        color: Colors.blue,
+        onTap: () => onButtonPressed(scissor, Colors.blue),
+      ),
+    ];
+
+    List<Widget> gameAreaList = [
+      // IA Choice
+      iaChoiceWidget(),
+      // VS Badge
+      Image.asset(vsImageUrl, height: 60, width: 60),
+      // User Choice
+      userChoiceWidget(),
+    ];
+
+    Widget actionButtons() {
+      return isWebSCreen
+          ? Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: buttonList,
+          )
+          : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: buttonList,
+          );
+    }
+
+    Expanded gameArea() {
+      return Expanded(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            isWebSCreen
+                ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: gameAreaList,
+                )
+                : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: gameAreaList,
+                ),
+            // Result Overlay
+            if (_showResult) resultOverlay(),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -350,56 +401,81 @@ class _HomePageState extends State<HomePage>
         actions: [LanguageWidget()],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ScoreBoardWidget(
-                userScore: userScore,
-                iaScore: iaScore,
-                roundsPlayed: roundsPlayed,
-                resetGame: resetGame,
-              ),
-
-              const SizedBox(height: 10),
-
-              // Game Area
-              Expanded(
-                child: Stack(
-                  children: [
-                    Column(
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(10.0),
+          child:
+              isWebSCreen
+                  ? Expanded(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        // IA Choice
-                        iaChoiceWidget(),
-                        // VS Badge
-                        Image.asset(vsImageUrl, height: 60, width: 60),
-                        // User Choice
-                        userChoiceWidget(),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          flex: 2,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const SizedBox(height: 15.0),
+                              ScoreBoardWidget(
+                                userScore: userScore,
+                                iaScore: iaScore,
+                                roundsPlayed: roundsPlayed,
+                                resetGame: resetGame,
+                              ),
+                              const SizedBox(height: 15.0),
+
+                              // Game Area
+                              gameArea(),
+                              const SizedBox(height: 15.0),
+                            ],
+                          ),
+                        ),
+
+                        // Action Buttons
+                        const SizedBox(width: 20),
+                        if (showButtons) ...[
+                          actionButtons(),
+                        ] else ...[
+                          LoadingAnimationWidget.bouncingBall(
+                            color: Color(0xFF8E24AA),
+                            size: MediaQuery.of(context).size.height * 0.06,
+                          ),
+                        ],
+                        const SizedBox(width: 10),
                       ],
                     ),
-                    // Result Overlay
-                    if (_showResult) resultOverlay(),
-                  ],
-                ),
-              ),
+                  )
+                  : Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ScoreBoardWidget(
+                        userScore: userScore,
+                        iaScore: iaScore,
+                        roundsPlayed: roundsPlayed,
+                        resetGame: resetGame,
+                      ),
 
-              const SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
-              // Action Buttons
-              if (showButtons) ...[
-                actionButtons(),
-              ] else ...[
-                LoadingAnimationWidget.bouncingBall(
-                  color: Color(0xFF8E24AA),
-                  size: MediaQuery.of(context).size.height * 0.06,
-                ),
-              ],
+                      // Game Area
+                      gameArea(),
 
-              const SizedBox(height: 30),
-            ],
-          ),
+                      const SizedBox(height: 10),
+
+                      // Action Buttons
+                      if (showButtons) ...[
+                        actionButtons(),
+                      ] else ...[
+                        LoadingAnimationWidget.bouncingBall(
+                          color: Color(0xFF8E24AA),
+                          size: MediaQuery.of(context).size.height * 0.06,
+                        ),
+                      ],
+
+                      const SizedBox(height: 30),
+                    ],
+                  ),
         ),
       ),
     );

@@ -12,3 +12,5 @@ const String questionImageUrl = "assets/images/question.png";
 
 const String iaProfileUrl = "assets/images/ia.png";
 const String userProfileUrl = "assets/images/user.png";
+
+final int webScreenSize = 600;
