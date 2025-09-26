@@ -18,14 +18,11 @@ class LanguageWidget extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(right: 8.0),
-      height: 32.0,
+      height: 35.0,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.onSurface,
-          width: 0.5,
-        ),
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<Locale>(
@@ -33,6 +30,11 @@ class LanguageWidget extends StatelessWidget {
           elevation: 8,
           borderRadius: BorderRadius.circular(12),
           dropdownColor: Theme.of(context).colorScheme.surface,
+          icon: Icon(
+            Icons.language,
+            color: Theme.of(context).colorScheme.onSurface,
+            size: 16,
+          ),
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSurface,
             fontWeight: FontWeight.bold,
