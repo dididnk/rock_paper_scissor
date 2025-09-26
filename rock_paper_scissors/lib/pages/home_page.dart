@@ -396,9 +396,10 @@ class _HomePageState extends State<HomePage>
           l10n.appTitle,
           style: Theme.of(
             context,
-          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: [LanguageWidget()],
+        centerTitle: false,
       ),
       body: SafeArea(
         child: Container(
