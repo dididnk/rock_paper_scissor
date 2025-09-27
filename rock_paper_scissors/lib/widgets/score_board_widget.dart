@@ -58,12 +58,12 @@ class ScoreBoardWidget extends StatelessWidget {
           ),
           Column(
             children: [
-              Icon(Icons.more_time_outlined, color: greyColor, size: 28),
+              Icon(Icons.more_time_outlined, color: greyColor, size: 18),
               const SizedBox(height: 5),
               Text(
                 "$roundsPlayed",
                 style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
+                  fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -82,8 +82,8 @@ class ScoreBoardWidget extends StatelessWidget {
               const SizedBox(height: 5),
               Text(
                 "$iaScore",
-                style: const TextStyle(
-                  fontSize: 24,
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                   fontWeight: FontWeight.bold,
                 ),
               ),
